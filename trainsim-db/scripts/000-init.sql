@@ -41,7 +41,7 @@ CREATE TABLE otp.orders (
     update_time DATE NOT NULL
 );
 
-CREATE TABLE tickets (
+CREATE TABLE otp.tickets (
     ticket_id SERIAL PRIMARY KEY,
     traveler_id INT REFERENCES otp.travelers (traveler_id) NOT NULL,
     order_id INT REFERENCES otp.orders (order_id) NOT NULL,
