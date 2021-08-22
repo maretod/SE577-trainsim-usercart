@@ -12,14 +12,14 @@ export class StopProvider {
         fetch("/api/stops")
             .then(res => res.json())
             .then(res => res as StopDto[])
-            .then(res => res.map(dto => new Stop(dto.id, dto.otpId, dto.name)))
+            .then(res => res.map(dto => new Stop(dto.stop_id, dto.otpId, dto.name)))
             .then(res => this.stops = res)
             .then(res => callback(res));
     }
 }
 
 interface StopDto {
-    id: number;
+    stop_id: number;
     otpId: string;
     name: string;
 };
