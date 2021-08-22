@@ -1,18 +1,18 @@
 package edu.drexel.trainsim.itinerary.models;
 
 public class Stop {
-    private int id;
+    private int stop_id;
     private String otpId;
     private String name;
 
     public Stop(int id, String otpId, String name) {
-        this.id = id;
+        this.stop_id = id;
         this.otpId = otpId;
         this.name = name;
     }
 
     public int getId() {
-        return id;
+        return stop_id;
     }
 
     public String getName() {

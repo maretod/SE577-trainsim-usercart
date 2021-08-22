@@ -1,18 +1,13 @@
 CREATE SCHEMA otp;
 
-CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
-    email TEXT UNIQUE NOT NULL
-);
-
 CREATE TABLE otp.stops (
-    id SERIAL PRIMARY KEY,
+    stop_id SERIAL PRIMARY KEY,
     otp_id VARCHAR(64) UNIQUE NOT NULL,
     name TEXT NOT NULL
 );
 
 CREATE TABLE otp.routes (
-    id SERIAL PRIMARY KEY,
+    route_id SERIAL PRIMARY KEY,
     otp_id VARCHAR(64) UNIQUE NOT NULL,
     name TEXT NOT NULL,
     short_name TEXT NOT NULL,
@@ -21,22 +16,52 @@ CREATE TABLE otp.routes (
 );
 
 CREATE TABLE otp.itineraries (
-    id UUID PRIMARY KEY
+    itinerary_id UUID PRIMARY KEY
+);
+
+CREATE TABLE otp.users (
+    user_id SERIAL PRIMARY KEY,
+    email TEXT UNIQUE NOT NULL
+);
+
+CREATE TABLE otp.travelers (
+    traveler_id SERIAL PRIMARY KEY,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
+    address TEXT,
+    email TEXT UNIQUE NOT NULL,
+    phone INT
+);
+
+CREATE TABLE otp.orders (
+    order_id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES otp.users (user_id) NOT NULL,
+    status TEXT NOT NULL,
+    created_time DATE NOT NULL,
+    update_time DATE NOT NULL
+);
+
+CREATE TABLE otp.tickets (
+    ticket_id SERIAL PRIMARY KEY,
+    traveler_id INT REFERENCES otp.travelers (traveler_id) NOT NULL,
+    order_id INT REFERENCES otp.orders (order_id) NOT NULL,
+    itinerary_id UUID REFERENCES otp.itineraries (itinerary_id) NOT NULL,
+    price DOUBLE PRECISION NOT NULL
 );
 
 CREATE TABLE otp.legs (
-    id UUID PRIMARY KEY,
-    itinerary_id UUID REFERENCES otp.itineraries (id) NOT NULL,
+    leg_id UUID PRIMARY KEY,
+    itinerary_id UUID REFERENCES otp.itineraries (itinerary_id) NOT NULL,
     -- route_id will be null if this is a walking leg.
-    route_id INT REFERENCES otp.routes (id),
+    route_id INT REFERENCES otp.routes (route_id),
     sort INT NOT NULL,
     distance DOUBLE PRECISION NOT NULL
 );
 
 CREATE TABLE otp.places (
-    id UUID PRIMARY KEY,
-    leg_id UUID REFERENCES otp.places (id) NOT NULL,
-    stop_id INT REFERENCES otp.stops (id) NOT NULL,
+    place_id UUID PRIMARY KEY,
+    leg_id UUID REFERENCES otp.legs (leg_id) NOT NULL,
+    stop_id INT REFERENCES otp.stops (stop_id) NOT NULL,
     sort INT NOT NULL,
     arrive_at TIMESTAMP WITH TIME ZONE NOT NULL,
     depart_at TIMESTAMP WITH TIME ZONE NOT NULL
