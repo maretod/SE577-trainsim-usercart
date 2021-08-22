@@ -10,9 +10,6 @@ import edu.drexel.trainsim.db.commands.GetOrCreateGoogleUser;
 import edu.drexel.trainsim.db.commands.GetOrCreateGoogleUserImpl;
 import org.sql2o.Sql2o;
 
-import edu.drexel.trainsim.itinerary.db.GetAllStops;
-import edu.drexel.trainsim.itinerary.db.GetAllStopsImpl;
-
 public class DatabaseModule extends AbstractModule {
     private final Sql2o db;
     private Gson gson;
@@ -24,7 +21,6 @@ public class DatabaseModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        bind(GetAllStops.class).to(GetAllStopsImpl.class);
         bind(GetOrCreateGoogleUser.class).to(GetOrCreateGoogleUserImpl.class);
     }
 

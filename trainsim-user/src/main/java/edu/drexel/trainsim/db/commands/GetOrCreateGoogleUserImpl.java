@@ -15,14 +15,14 @@ public class GetOrCreateGoogleUserImpl implements GetOrCreateGoogleUser {
 
     @Override
     public User call(String email) {
-        String sql = "SELECT id, email FROM users WHERE email = :email";
+        String sql = "SELECT user_id, email FROM otp.users WHERE email = :email";
 
         try (var con = this.db.open()) {
             var res = con.createQuery(sql).addParameter("email", email).executeAndFetch(User.class);
 
             // There is a race condition here if we have more than one servers talking to the db.
             if (res.isEmpty()) {
-                sql = "INSERT INTO users(email) VALUES(:email) RETURNING id, email";
+                sql = "INSERT INTO otp.users(email) VALUES(:email) RETURNING user_id, email";
                 return con.createQuery(sql).addParameter("email", email).executeAndFetch(User.class).get(0);
             }
 
