@@ -6,7 +6,7 @@ import SearchResult from "../models/SearchResult";
 
 export default class ItineraryProvider {
     fetchItineraries(search: ItinerarySearch, callback: (itineraries: SearchResult) => void) {
-        fetch("/api/query", { method: "POST", body: search.toJson() })
+        fetch("/api/itinerary/query", { method: "POST", body: search.toJson() })
             .then(res => res.json())
             .then(res => res as SearchResultDto)
             .then(res => fromSearchResultDto(res))
