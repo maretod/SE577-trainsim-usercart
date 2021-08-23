@@ -10,6 +10,7 @@
 
   <modules>
       <module>trainsim-itinerary</module>
+      <module>trainsim-user</module>
       <module>trainsim-client</module>
   </modules>
 
