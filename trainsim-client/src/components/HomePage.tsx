@@ -9,7 +9,7 @@ export interface HomePageProps {
 }
 
 interface HomePageState {
-    stops: readonly Stop[]
+    stops: readonly Stop[];
 }
 
 export default class HomePage extends Component<HomePageProps, HomePageState> {

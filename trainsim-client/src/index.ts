@@ -1,6 +1,7 @@
 import "@fortawesome/fontawesome-free/css/all.css";
 import "bulma-o-steps/bulma-steps.css";
 import "bulma/css/bulma.css";
+import "./css/app.css";
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App";

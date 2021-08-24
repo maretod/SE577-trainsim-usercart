@@ -8,6 +8,7 @@ import ProgressTracker from "./PurchaseTracker";
 import SearchHeader from "./SearchHeader";
 import TravelerForm from "./TravelerForm";
 import SearchResult from "../models/SearchResult";
+import Cart from "../models/Cart";
 
 export interface TravelerInfoPageProps {
     search: ItinerarySearch;

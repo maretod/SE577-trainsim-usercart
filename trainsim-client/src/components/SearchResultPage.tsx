@@ -7,6 +7,7 @@ import ProgressTracker from "./PurchaseTracker";
 import SearchHeader from "./SearchHeader";
 import SearchResultItem from "./SearchResultItem";
 import TravelerInfoPage from "./TravelerInfoPage";
+import { AppContext } from "../contexts/AppContext";
 
 interface SearchResultPageProps {
     search: ItinerarySearch;
@@ -22,9 +23,13 @@ export default class SearchResultPage extends Component<SearchResultPageProps, S
     constructor(props: SearchResultPageProps) {
         super(props);
         this.state = {isOutbound: true};
+        SearchResultPage.contextType = AppContext;
     }
 
     itinerarySelected(itin: Itinerary) {
+        this.context.cart.addItinerary(itin);
+        this.context.updateContext(this.context.cart);
+
         if(this.state.isOutbound && this.props.search.returnDate && this.props.searchResult.returnItineraries.length > 0) {
             this.setState({isOutbound: false});
         } else {
