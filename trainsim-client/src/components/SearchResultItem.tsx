@@ -62,7 +62,7 @@ export default (props: SearchResultItemProps) => (
                     <button
                         className="button is-fullwidth is-primary has-text-weight-bold"
                         onClick={_ => props.select()} >
-                        Select
+                        Add to Cart
                     </button>
                 </div>
             </div>
