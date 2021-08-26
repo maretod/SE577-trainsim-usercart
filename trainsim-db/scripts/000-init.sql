@@ -24,6 +24,16 @@ CREATE TABLE otp.users (
     email TEXT UNIQUE NOT NULL
 );
 
+CREATE TABLE otp.user_cart (
+    user_cart_id SERIAL PRIMARY KEY,
+    email TEXT UNIQUE NOT NULL,
+    source TEXT NOT NULL,
+    target TEXT NOT NULL,
+    depart_date TEXT NOT NULL,
+    return_date TEXT,
+    count_travellers TEXT NOT NULL
+);
+
 CREATE TABLE otp.travelers (
     traveler_id SERIAL PRIMARY KEY,
     first_name TEXT NOT NULL,
