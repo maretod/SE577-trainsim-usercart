@@ -9,7 +9,7 @@ export interface HomePageProps {
 }
 
 interface HomePageState {
-    stops: readonly Stop[];
+    stops: Stop[];
 }
 
 export default class HomePage extends Component<HomePageProps, HomePageState> {
@@ -28,7 +28,7 @@ export default class HomePage extends Component<HomePageProps, HomePageState> {
     override render() {
         return <>
             <Banner />
-            <SearchForm setPage={this.props.setPage} stops={this.state.stops} />
+            <SearchForm setPage={this.props.setPage} stops={this.state.stops} stopProvider={this.stopProvider} />
         </>;
     }
 }

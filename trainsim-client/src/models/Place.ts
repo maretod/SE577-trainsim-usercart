@@ -1,12 +1,15 @@
+import { StopProvider } from "../providers/StopProvider";
+import Stop from "./Stop";
+
 export default class Place {
     private readonly _id: string;
-    private readonly _stopId: string;
+    private readonly _stop: Stop;
     private readonly _arriveAt: Date;
     private readonly _departAt: Date;
 
-    constructor(id: string, stopId: string, arriveAt: Date, departAt: Date) {
+    constructor(id: string, stop: Stop, arriveAt: Date, departAt: Date) {
         this._id = id;
-        this._stopId = stopId;
+        this._stop = stop;
         this._arriveAt = arriveAt;
         this._departAt = departAt;
     }
@@ -15,8 +18,8 @@ export default class Place {
         return this._id;
     }
 
-    public get stopId(): string {
-        return this._stopId;
+    public get stop(): Stop {
+        return this._stop;
     }
 
     public get arriveAt(): Date {

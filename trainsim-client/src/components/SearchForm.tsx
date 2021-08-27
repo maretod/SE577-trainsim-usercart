@@ -6,6 +6,7 @@ import DateField from "./DateField";
 import RangeDropdown from "./RangeDropdown";
 import SearchResultPage from "./SearchResultPage";
 import StopDropdown from "./StopDropdown";
+import { StopProvider } from "../providers/StopProvider";
 
 interface SearchFormState {
     source?: Stop;
@@ -18,7 +19,8 @@ interface SearchFormState {
 }
 
 interface SearchFormProps {
-    stops: readonly Stop[];
+    stops: Stop[];
+    stopProvider: StopProvider;
     setPage: (page: ReactElement) => void;
 }
 
@@ -44,7 +46,7 @@ export default class SearchForm extends React.Component<SearchFormProps, SearchF
             isLoading: false
         };
 
-        this.itineraryProvider = new ItineraryProvider();
+        this.itineraryProvider = new ItineraryProvider(this.props.stopProvider);
         this.submit = this.submit.bind(this);
     }
 
