@@ -1,9 +1,9 @@
 import Stop from "../models/Stop";
 
 export class StopProvider {
-    private stops?: readonly Stop[];
+    private stops?: Stop[];
 
-    fetchStops(callback: (stops: readonly Stop[]) => void) {
+    fetchStops(callback: (stops: Stop[]) => void) {
         if (this.stops) {
             callback(this.stops);
             return;
@@ -15,6 +15,18 @@ export class StopProvider {
             .then(res => res.map(dto => new Stop(dto.stop_id, dto.otpId, dto.name)))
             .then(res => this.stops = res)
             .then(res => callback(res));
+    }
+
+    fetchStop(stopId: string): Stop {
+        let stop: Stop = new Stop(-1, "", "");
+        if(this.stops == undefined)
+            return stop;
+        
+        for(let i = 0; i < this.stops?.length; i++)
+            if(stopId === this.stops[i].otpId)
+                stop = this.stops[i];
+
+        return stop;
     }
 }
 
