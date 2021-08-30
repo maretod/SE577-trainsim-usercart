@@ -2,7 +2,6 @@ package edu.drexel.trainsim.web;
 
 import com.google.inject.Inject;
 import edu.drexel.trainsim.db.commands.GetOrCreateUserCart;
-import edu.drexel.trainsim.db.models.UserCart;
 import edu.drexel.trainsim.db.models.UserCartRequest;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
